@@ -1,0 +1,3 @@
+CRASH! no such table: user
+most probably dropped all the tables.
+"flask db upgrade" should solve the problem!
