@@ -13,6 +13,10 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField(_l('Remember Me'))
     submit = SubmitField(_l('Sign In'))
 
+class DeleteForm(FlaskForm):
+    decision = TextAreaField('Write \'yes\' if you really wanna delete all your posts', validators=[
+        DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Submit')
 
 class RegistrationForm(FlaskForm):
     username = StringField(_l('Username'), validators=[DataRequired()])

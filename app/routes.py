@@ -5,7 +5,7 @@ from werkzeug.urls import url_parse
 from flask_babel import _, get_locale
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, \
-    ResetPasswordRequestForm, ResetPasswordForm
+    ResetPasswordRequestForm, ResetPasswordForm, DeleteForm
 from app.models import User, Post
 from app.email import send_password_reset_email
 
@@ -40,6 +40,32 @@ def index():
                            posts=posts.items, next_url=next_url,
                            prev_url=prev_url)
 
+
+@app.route('/d/<username>', methods=['GET', 'POST'])
+@login_required
+def delete_own_posts(username):
+    user = User.query.filter_by(username = username).first()
+    if current_user != user:
+        flash('You cannot delete the post history of someone else')
+        return redirect(url_for('index'))
+    #Here only if it's you that wants to come here.
+    form = DeleteForm()
+    if form.validate_on_submit():
+        string = 'yes'
+        if form.decision.data == string:
+            #delete and commit and redirect
+            own = Post.query.filter_by(user_id=user.id)
+            if own.count() == 0:
+                flash('Nothing to delete anymore!')
+                return redirect(url_for('user', username = username))
+            for p in own:
+                db.session.delete(p)
+            db.session.commit()
+            flash('All your posts have been deleted!')
+            return redirect(url_for('user', username = username))
+        flash('Glad you didn\'t delete!')
+        return redirect(url_for('user', username = username))
+    return render_template('delete_own_posts.html', form = form)
 
 @app.route('/explore')
 @login_required
