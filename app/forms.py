@@ -16,6 +16,11 @@ class PostForm(FlaskForm):
         DataRequired(), Length(min=1, max=140)])
     submit = SubmitField('Submit')
 
+class DeleteForm(FlaskForm):
+    decision = TextAreaField('Write \'yes\' if you really wanna delete all your posts', validators=[
+        DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Submit')
+
 class ResetPasswordRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')

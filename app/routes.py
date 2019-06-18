@@ -6,7 +6,7 @@ from app import app
 from app import db
 from flask import render_template, flash, redirect, url_for
 from app.forms import LoginForm, EditProfileForm, RegistrationForm
-from app.forms import ResetPasswordForm, PostForm, ResetPasswordRequestForm
+from app.forms import ResetPasswordForm, PostForm, ResetPasswordRequestForm, DeleteForm
 from app.email import send_password_reset_email
 
 from flask_login import current_user, login_user
@@ -66,7 +66,34 @@ def follow(username):
     db.session.commit()
     flash('You are following {}!'.format(username))
     return redirect(url_for('user', username=username))
+#START
+@app.route('/d/<username>', methods=['GET', 'POST'])
+@login_required
+def delete_own_posts(username):
+    user = User.query.filter_by(username = username).first()
+    if current_user != user:
+        flash('You cannot delete the post history of someone else')
+        return redirect(url_for('index'))
+    #Here only if it's you that wants to come here.
+    form = DeleteForm()
+    if form.validate_on_submit():
+        string = 'yes'
+        if form.decision.data == string:
+            #delete and commit and redirect
+            own = Post.query.filter_by(user_id=user.id)
+            if own.count() == 0:
+                flash('Nothing to delete anymore!')
+                return redirect(url_for('user', username = username))
+            for p in own:
+                db.session.delete(p)
+            db.session.commit()
+            flash('All your posts have been deleted!')
+            return redirect(url_for('user', username = username))
+        flash('Glad you didn\'t delete!')
+        return redirect(url_for('user', username = username))
+    return render_template('delete_own_posts.html', form = form)
 
+#END
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
