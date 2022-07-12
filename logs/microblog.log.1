@@ -1,0 +1,126 @@
+2022-07-11 15:47:58,700 INFO: Microblog startup [in C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\__init__.py:52]
+2022-07-11 15:48:07,116 INFO: Microblog startup [in C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\__init__.py:52]
+2022-07-11 15:48:17,780 INFO: Microblog startup [in C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\__init__.py:52]
+2022-07-11 15:48:42,828 INFO: Microblog startup [in C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\__init__.py:52]
+2022-07-11 15:49:12,080 ERROR: Exception on /register [POST] [in c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py:1758]
+Traceback (most recent call last):
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: user
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\routes.py", line 114, in register
+    if form.validate_on_submit():
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask_wtf\form.py", line 101, in validate_on_submit
+    return self.is_submitted() and self.validate()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\wtforms\form.py", line 310, in validate
+    return super(Form, self).validate(extra)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\wtforms\form.py", line 152, in validate
+    if not field.validate(self, extra):
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\wtforms\fields\core.py", line 206, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\wtforms\fields\core.py", line 226, in _run_validation_chain
+    validator(form, self)
+  File "C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\forms.py", line 31, in validate_username
+    user = User.query.filter_by(username=username.data).first()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2819, in first
+    return self.limit(1)._iter().first()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2903, in _iter
+    result = self.session.execute(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\util\compat.py", line 208, in raise_
+    raise exception
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('Kuo =', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2022-07-11 15:49:51,317 ERROR: Exception on /login [POST] [in c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py:1758]
+Traceback (most recent call last):
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: user
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\routes.py", line 91, in login
+    user = User.query.filter_by(username=form.username.data).first()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2819, in first
+    return self.limit(1)._iter().first()
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2903, in _iter
+    result = self.session.execute(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\util\compat.py", line 208, in raise_
+    raise exception
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "c:\users\alex\documents\github\microblog_flask\venv\lib\site-packages\sqlalchemy\engine\default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('Kuo =', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2022-07-11 15:55:20,300 INFO: Microblog startup [in C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\__init__.py:52]
+2022-07-11 15:56:01,546 INFO: Microblog startup [in C:\Users\Alex\Documents\GitHub\Microblog_Flask\app\__init__.py:52]

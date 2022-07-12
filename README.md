@@ -33,4 +33,11 @@ Why?
 
 ### Database
 
-TBD!
+SQLAlchemy
+
+### How to run this?
+$ pip install -r req.txt
+$ flask db init
+$ flask db upgrade
+$ flask run
+$
